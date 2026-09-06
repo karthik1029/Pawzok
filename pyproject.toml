@@ -25,6 +25,9 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Topic :: Software Development :: Testing",
 ]
+dependencies = [
+    "requests>=2.31",
+]
 
 [project.optional-dependencies]
 dev = [
