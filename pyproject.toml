@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pawzok"
-version = "0.1.1"
+version = "0.2.0"
 description = "Follow the trail. Verify what actually happened."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -12,7 +12,7 @@ license = {text = "MIT"}
 authors = [
     {name = "Karthik Chandran"}
 ]
-keywords = ["testing", "pytest", "sql", "database", "validation", "polling", "automation"]
+keywords = ["testing", "pytest", "sql", "api", "database", "validation", "polling", "automation"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
