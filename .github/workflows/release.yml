@@ -1,6 +1,7 @@
 name: Publish Pawzok to PyPI
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - "v*"
