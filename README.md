@@ -2,30 +2,62 @@
 
 **Follow the trail. Verify what actually happened.**
 
-Pawzok is a Python testing library for verifying application state without repetitive database connection, polling, and assertion code.
+Pawzok is a Python testing library for verifying application state without repetitive connection, polling, request, and assertion code.
 
-## v0.1
+## v0.2
 
-The first release focuses on SQL state validation:
+Pawzok now supports both API and SQL validation:
 
+- `assert_api()` for HTTP status and JSON response validation
 - `assert_sql()` for concise database assertions
-- smart polling for eventually consistent state
+- smart polling for eventually consistent database state
 - clear, pytest-friendly failure messages
-- SQLite support with no external database required
-- a small foundation designed for future validators
+- SQLite support
+- Python 3.9 through 3.13
 
-## Installation for development
+## Installation
+
+```bash
+pip install pawzok
+```
+
+For development:
 
 ```bash
 git clone https://github.com/karthik1029/Pawzok.git
 cd Pawzok
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
-pip install -e ".[dev]"
-pytest
+python3 -m pip install -e ".[dev]"
+python3 -m pytest
 ```
 
-## Quick start
+## API validation
+
+```python
+from pawzok import assert_api
+
+result = assert_api(
+    method="GET",
+    url="https://api.example.com/orders/123",
+    expected_status=200,
+    expected={"status": "READY"},
+)
+```
+
+Pawzok checks the HTTP status and the expected JSON fields. Extra fields in the response are allowed.
+
+If the API returns the wrong state, Pawzok reports the difference clearly:
+
+```text
+Pawzok API assertion failed.
+Expected status: 200
+Actual status:   200
+Differences:
+  status: expected 'READY', got 'PROCESSING'
+```
+
+## SQL validation
 
 ```python
 from pawzok import assert_sql
@@ -57,8 +89,8 @@ Pawzok keeps checking until the expected state appears or the timeout expires.
 
 ## Roadmap
 
-- **0.1** — SQL assertions and smart polling
-- **0.2** — API validation
+- **0.1** — SQL assertions and smart polling ✅
+- **0.2** — API validation ✅
 - **0.3** — API + SQL workflow traces
 - **0.4** — event-stream validation
 - **0.5** — cross-system correlation
