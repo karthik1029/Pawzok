@@ -1,4 +1,4 @@
-# Pawzok 🐾
+# Pawzok
 
 **Follow the trail. Verify what actually happened.**
 
