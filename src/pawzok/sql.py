@@ -1,6 +1,6 @@
 import sqlite3
 from pathlib import Path
-from typing import Any, Mapping, Sequence, Union
+from typing import Any, Mapping, Optional, Sequence, Union
 
 from .exceptions import PawzokAssertionError
 from .polling import poll_until
@@ -12,7 +12,7 @@ Connection = Union[str, Path, sqlite3.Connection]
 def _fetch_one(
     connection: Connection,
     query: str,
-    params: Sequence[Any] | Mapping[str, Any] | None,
+    params: Optional[Union[Sequence[Any], Mapping[str, Any]]],
 ) -> dict[str, Any]:
     owns_connection = not isinstance(connection, sqlite3.Connection)
     db = sqlite3.connect(str(connection)) if owns_connection else connection
@@ -62,7 +62,7 @@ def assert_sql(
     connection: Connection,
     query: str,
     expected: Mapping[str, Any],
-    params: Sequence[Any] | Mapping[str, Any] | None = None,
+    params: Optional[Union[Sequence[Any], Mapping[str, Any]]] = None,
     timeout: float = 0,
     poll_every: float = 1,
 ) -> SQLResult:

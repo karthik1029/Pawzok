@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pawzok"
-version = "0.1.0"
+version = "0.1.1"
 description = "Follow the trail. Verify what actually happened."
 readme = "README.md"
 requires-python = ">=3.9"
